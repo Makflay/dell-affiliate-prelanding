@@ -1,5 +1,7 @@
 .page {
-  overflow: hidden;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: clip;
 }
 
 .header {
@@ -26,14 +28,17 @@
   font-size: 0.94rem;
 }
 
-.navigation a,
-.text-link {
-  transition: color 160ms ease;
-}
-
 .navigation a:hover,
 .text-link:hover {
   color: #0672ce;
+}
+
+.navigation a:focus-visible,
+.logo:focus-visible,
+.button:focus-visible,
+.text-link:focus-visible {
+  outline: 3px solid rgba(6, 114, 206, 0.35);
+  outline-offset: 4px;
 }
 
 .button {
@@ -41,19 +46,17 @@
   align-items: center;
   justify-content: center;
   min-height: 52px;
-  padding: 0 26px;
+  padding: 12px 26px;
   border-radius: 6px;
   color: #ffffff;
   background: #0672ce;
   font-weight: 700;
-  transition:
-    background 160ms ease,
-    transform 160ms ease;
+  line-height: 1.25;
+  text-align: center;
 }
 
 .button:hover {
   background: #005da8;
-  transform: translateY(-2px);
 }
 
 .button--small {
@@ -85,6 +88,11 @@
   max-width: 580px;
 }
 
+.hero__content,
+.hero__visual {
+  min-width: 0;
+}
+
 .eyebrow {
   display: inline-block;
   margin-bottom: 18px;
@@ -103,24 +111,27 @@
 }
 
 .page h1 {
+  max-width: 12ch;
   margin-bottom: 24px;
-  font-size: clamp(3rem, 6vw, 5.3rem);
-  line-height: 0.98;
-  letter-spacing: -0.055em;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  text-wrap: balance;
 }
 
 .page h2 {
   margin-bottom: 20px;
-  font-size: clamp(2rem, 4vw, 3.3rem);
-  line-height: 1.08;
-  letter-spacing: -0.04em;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
 }
 
 .hero__content > p {
-  max-width: 520px;
+  max-width: 52ch;
   margin-bottom: 34px;
   color: #4f5f68;
-  font-size: 1.12rem;
+  font-size: clamp(1rem, 1.5vw, 1.12rem);
 }
 
 .hero__actions {
@@ -147,8 +158,8 @@
 }
 
 .laptop {
-  width: min(100%, 500px);
-  transform: perspective(1000px) rotateY(-8deg) rotateX(2deg);
+  width: min(calc(100% - 32px), 500px);
+  max-width: 100%;
 }
 
 .laptop__screen {
@@ -184,9 +195,10 @@
 }
 
 .laptop__base {
-  width: 112%;
+  width: 108%;
+  max-width: calc(100% + 24px);
   height: 18px;
-  margin-left: -6%;
+  margin-left: -4%;
   border-radius: 2px 2px 16px 16px;
   background: linear-gradient(#c8d0d4, #75828a);
   box-shadow: 0 18px 20px rgba(20, 73, 102, 0.15);
@@ -404,6 +416,12 @@
   font-size: 1rem;
 }
 
+#about,
+#benefits,
+#products {
+  scroll-margin-top: 24px;
+}
+
 @media (max-width: 900px) {
   .navigation {
     display: none;
@@ -420,6 +438,19 @@
 
   .hero__visual {
     min-height: 380px;
+  }
+
+  .hero {
+    gap: 36px;
+  }
+
+  .section {
+    padding-top: 88px;
+    padding-bottom: 88px;
+  }
+
+  .about {
+    max-width: 720px;
   }
 
   .about {
@@ -448,9 +479,10 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .header {
-    width: min(100% - 32px, 1180px);
+    width: calc(100% - 32px);
+    min-height: 68px;
   }
 
   .header .button {
@@ -460,21 +492,55 @@
   .hero {
     width: calc(100% - 20px);
     min-height: auto;
-    padding: 54px 24px;
+    padding: 48px 22px;
+    gap: 28px;
     border-radius: 16px;
   }
 
   .page h1 {
-    font-size: 3rem;
+    max-width: none;
+    font-size: clamp(2.35rem, 12vw, 3.25rem);
+    line-height: 1.02;
+  }
+
+  .page h2 {
+    font-size: clamp(1.75rem, 8vw, 2.35rem);
+  }
+
+  .eyebrow {
+    margin-bottom: 14px;
+    font-size: 0.72rem;
   }
 
   .hero__actions {
-    align-items: flex-start;
+    width: 100%;
+    align-items: stretch;
     flex-direction: column;
+    gap: 18px;
+  }
+
+  .hero__actions .button {
+    width: 100%;
+  }
+
+  .hero__actions .text-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .hero__visual {
-    min-height: 280px;
+    min-height: 250px;
+  }
+
+  .laptop {
+    width: min(calc(100% - 16px), 390px);
+  }
+
+  .laptop__screen {
+    border-width: 7px;
+    border-bottom-width: 12px;
   }
 
   .floating-card {
@@ -483,12 +549,36 @@
 
   .section {
     width: calc(100% - 32px);
-    padding: 80px 0;
+    padding: 72px 0;
+  }
+
+  .about {
+    gap: 12px;
+  }
+
+  .about__text {
+    font-size: 1rem;
   }
 
   .benefits {
     width: 100%;
-    padding: 80px 16px;
+    padding: 72px 16px;
+  }
+
+  .section-heading {
+    margin-bottom: 36px;
+  }
+
+  .benefits__grid {
+    gap: 14px;
+  }
+
+  .benefit-card {
+    padding: 26px 24px;
+  }
+
+  .benefit-card__number {
+    margin-bottom: 28px;
   }
 
   .products {
@@ -496,18 +586,54 @@
     padding: 0;
   }
 
-  .products__content,
-  .products__list {
+  .products__content {
     padding: 48px 24px;
   }
 
+  .products__content .button {
+    width: 100%;
+  }
+
   .products__list {
-    padding-top: 16px;
+    padding: 14px 24px 28px;
+  }
+
+  .products__list article {
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 12px;
+    padding: 24px 0;
+  }
+
+  .final-cta .button {
+    width: 100%;
   }
 
   .footer {
+    width: calc(100% - 32px);
     grid-template-columns: 1fr;
     justify-items: center;
+    gap: 20px;
+    padding: 28px 0;
     text-align: center;
+  }
+}
+
+@media (min-width: 901px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 0.85fr);
+    column-gap: clamp(64px, 7vw, 104px);
+  }
+
+  .hero__visual {
+    min-width: 0;
+    justify-content: flex-end;
+    transform: translate(160px, 64px);
+  }
+  .laptop {
+    width: min(100%, 460px);
+  }
+
+  .floating-card--bottom {
+    left: 24px;
   }
 }
