@@ -17,6 +17,32 @@ app.get("/health", (_request, response) => {
   response.json({ status: "ok" });
 });
 
+app.get("/clicks", async (_request, response) => {
+  try {
+    const clicks = await prisma.click.findMany({
+      select: {
+        clickId: true,
+        offer: true,
+        sub1: true,
+        timestamp: true,
+        ip: true,
+        userAgent: true,
+      },
+      orderBy: {
+        timestamp: "desc",
+      },
+    });
+
+    response.json(clicks);
+  } catch (error) {
+    console.error("Failed to fetch clicks:", error);
+
+    response.status(500).json({
+      error: "Failed to fetch clicks",
+    });
+  }
+});
+
 app.get("/click", async (request, response) => {
   const { offer, sub1 } = request.query;
 
