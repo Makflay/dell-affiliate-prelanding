@@ -63,15 +63,26 @@ VITE_GTM_ID=GTM-XXXXXXX
 
 ```dotenv
 PORT=3000
+
+# Local PostgreSQL
 DATABASE_URL="postgresql://postgres:postgres@localhost:5432/dell_affiliate?schema=public"
+DIRECT_URL="postgresql://postgres:postgres@localhost:5432/dell_affiliate?schema=public"
+
+# Neon example
+# DATABASE_URL="postgresql://USER:PASSWORD@HOST-pooler/DATABASE?sslmode=require"
+# DIRECT_URL="postgresql://USER:PASSWORD@HOST/DATABASE?sslmode=require"
 ```
 
 Переменные:
 
-- `PORT` — порт Express-сервера; по умолчанию используется `3000`;
-- `DATABASE_URL` — строка подключения к PostgreSQL.
-
-Не добавляйте `.env` с реальными паролями и ID в Git.
+- `PORT` — порт Express-сервера; по умолчанию используется 3000;
+- `DATABASE_URL` — runtime-подключение приложения к PostgreSQL;
+- `DIRECT_URL` — прямое подключение к PostgreSQL, используемое Prisma CLI для миграций.
+  Для локального PostgreSQL DATABASE_URL и DIRECT_URL могут указывать на одну и ту же базу.
+  При использовании Neon:
+- `DATABASE_URL` может использовать pooled connection;
+- `DIRECT_URL` используется как direct connection для Prisma migrations.
+  При переключении между локальной и облачной БД оставляйте активной только одну пару DATABASE_URL / DIRECT_URL.
 
 ## Установка зависимостей
 
