@@ -14,6 +14,18 @@ const getClickUrl = (sub1: "hero" | "products" | "bottom") => {
   return url.toString();
 };
 
+type CtaPlacement = "header" | "hero" | "products" | "bottom";
+
+const trackCtaClick = (placement: CtaPlacement) => {
+  window.dataLayer = window.dataLayer || [];
+
+  window.dataLayer.push({
+    event: "cta_click",
+    offer: "Dell",
+    placement,
+  });
+};
+
 const benefits = [
   {
     number: "01",
@@ -54,6 +66,7 @@ function App() {
           href={getClickUrl("hero")}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => trackCtaClick("header")}
         >
           Смотреть решения
         </a>
@@ -77,6 +90,7 @@ function App() {
                 href={getClickUrl("hero")}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackCtaClick("hero")}
               >
                 Выбрать устройство
               </a>
@@ -158,6 +172,7 @@ function App() {
               href={getClickUrl("products")}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackCtaClick("products")}
             >
               Перейти к предложениям
             </a>
@@ -203,6 +218,7 @@ function App() {
             href={getClickUrl("bottom")}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackCtaClick("bottom")}
           >
             Посмотреть предложения
           </a>
