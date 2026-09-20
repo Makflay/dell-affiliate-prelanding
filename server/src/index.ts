@@ -7,7 +7,7 @@ const app = express();
 const port = Number(process.env.PORT) || 3000;
 
 const offerUrls: Record<string, string> = {
-  Dell: "https://www.dell.com/",
+  Dell: "https://www.dell.com/en-us",
 };
 
 app.set("trust proxy", true);

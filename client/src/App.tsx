@@ -1,4 +1,18 @@
 import "./App.css";
+const apiUrl = import.meta.env.VITE_API_URL;
+
+if (!apiUrl) {
+  throw new Error("VITE_API_URL is not configured");
+}
+
+const getClickUrl = (sub1: "hero" | "products" | "bottom") => {
+  const url = new URL("/click", apiUrl);
+
+  url.searchParams.set("offer", "Dell");
+  url.searchParams.set("sub1", sub1);
+
+  return url.toString();
+};
 
 const benefits = [
   {
@@ -35,7 +49,12 @@ function App() {
           <a href="#products">Продукты</a>
         </nav>
 
-        <a className="button button--small" href="#products">
+        <a
+          className="button button--small"
+          href={getClickUrl("hero")}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Смотреть решения
         </a>
       </header>
@@ -53,7 +72,12 @@ function App() {
             </p>
 
             <div className="hero__actions">
-              <a className="button" href="#products">
+              <a
+                className="button"
+                href={getClickUrl("hero")}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Выбрать устройство
               </a>
 
@@ -129,7 +153,12 @@ function App() {
               мониторов и аксессуаров Dell.
             </p>
 
-            <a className="button button--light" href="#products">
+            <a
+              className="button button--light"
+              href={getClickUrl("products")}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Перейти к предложениям
             </a>
           </div>
@@ -169,7 +198,12 @@ function App() {
             именно вам.
           </p>
 
-          <a className="button" href="#products">
+          <a
+            className="button"
+            href={getClickUrl("bottom")}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Посмотреть предложения
           </a>
         </section>
