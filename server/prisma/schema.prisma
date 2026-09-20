@@ -13,3 +13,13 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Click {
+  id        Int      @id @default(autoincrement())
+  clickId   String   @unique
+  offer     String
+  sub1      String?
+  timestamp DateTime @default(now())
+  ip        String?
+  userAgent String?
+}

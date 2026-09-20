@@ -19,6 +19,7 @@ pnpm-debug.log*
 # Prisma
 server/prisma/*.db
 server/prisma/*.db-journal
+server/src/generated/prisma/
 
 # Editors and OS
 .vscode/
